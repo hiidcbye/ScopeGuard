@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScopeGuard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">⬡ ScopeGuard</div>
+    <p class="tagline">AI-Powered Scope Creep Detector for Freelancers</p>
+  </header>
+
+  <main>
+    <!-- INPUTS -->
+    <section class="inputs">
+      <div class="field">
+        <label>Original Project Scope / Agreement</label>
+        <textarea id="scope" rows="7" placeholder="Paste your original contract or project brief here..."></textarea>
+      </div>
+      <div class="field">
+        <label>Client's New Request</label>
+        <textarea id="request" rows="6" placeholder="Paste what the client is now asking for..."></textarea>
+      </div>
+      <div class="field">
+        <label>Your Hourly Rate (₹ or $)</label>
+        <input type="number" id="rate" placeholder="e.g. 2000" min="1" />
+      </div>
+      <div id="errorMsg" class="error hidden"></div>
+      <button id="analyzeBtn" onclick="analyze()">Analyze Risk →</button>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="results hidden" id="results">
+
+      <div class="risk-banner" id="riskBanner">
+        <div>
+          <div class="risk-amount" id="riskAmount">—</div>
+          <div class="risk-sub" id="riskSub">Revenue at risk</div>
+        </div>
+        <div class="verdict-pill" id="verdictPill">—</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="card">
+          <div class="card-title">Evidence of Scope Creep</div>
+          <ul id="evidenceList"></ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Extra Hours Estimated</div>
+          <div class="big-number" id="hoursNum">—</div>
+          <div class="card-sub">hours of unpaid work</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Drafted Response — Ready to Send</div>
+        <textarea id="emailDraft" rows="10" readonly></textarea>
+        <button class="copy-btn" onclick="copyEmail()">Copy Email</button>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
