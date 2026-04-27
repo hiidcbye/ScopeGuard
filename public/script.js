@@ -1,4 +1,5 @@
-const API_BASE_URL = window.SCOPEGUARD_API_BASE_URL || "https://scopeguard.onrender.com";
+const API_BASE_URL =
+  window.SCOPEGUARD_API_BASE_URL || "https://scopeguard.onrender.com";
 
 async function analyze() {
   const scope = document.getElementById("scope").value.trim();

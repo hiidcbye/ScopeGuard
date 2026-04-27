@@ -39,9 +39,27 @@ npm start
 ## Files of interest
 
 - `server.js` — Express backend that calls Google Generative AI
-- `script.js` — client-side UI logic and API calls
-- `style.css`, `index.html` — frontend
+- `public/script.js` — client-side UI logic and API calls
+- `public/style.css`, `public/index.html` — frontend
 - `.env.example` — template for required environment variables
+- `firebase.json`, `.firebaserc` — Firebase Hosting configuration
+
+## Project structure
+
+```text
+ScopeGuard/
+  firebase.json
+  .firebaserc
+  public/
+    index.html
+    style.css
+    script.js
+    assets/
+  server.js
+  package.json
+  package-lock.json
+  .env
+```
 
 ## Configuration
 

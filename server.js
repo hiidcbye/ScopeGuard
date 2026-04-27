@@ -6,7 +6,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(".")); // serves index.html
+app.use(express.static("public")); // serves public/index.html
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const MODEL_CANDIDATES = [
