@@ -1,6 +1,8 @@
 # ScopeGuard
 
-[![Node.js CI](https://github.com/actions/workflows/node.js.yml/badge.svg)](https://github.com/)
+ScopeGuard is a lightweight single-page app (Express backend + static frontend) that helps freelancers detect scope creep. Given an original project scope, a client's new request, and an hourly rate, the app uses Google Generative AI to:
+
+[Live demo](https://scopeguard.onrender.com) · [Source on GitHub](https://github.com/hiidcbye/ScopeGuard)
 
 ScopeGuard is a lightweight single-page app (Express backend + static frontend) that helps freelancers detect scope creep. Given an original project scope, a client's new request, and an hourly rate, the app uses Google Generative AI to:
 
