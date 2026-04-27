@@ -98,6 +98,14 @@ If you do not have enough information to answer correctly, set estimatedHours to
     throw lastError;
   }
 
+  function isApiKeyInvalidError(err) {
+    const msg = String(err?.message || "");
+    return (
+      err?.status === 400 &&
+      (msg.includes("API key not valid") || msg.includes("API_KEY_INVALID"))
+    );
+  }
+
   // Extract first {...} block from text
   function extractJson(text) {
     const m = String(text).match(/\{[\s\S]*\}/);
@@ -170,7 +178,6 @@ Hourly Rate: ${rate}`;
 
     // parse and validate analysis
     let analysis;
-    let parseErr;
     const maxAnalysisAttempts = 2;
     for (let attempt = 0; attempt <= maxAnalysisAttempts; attempt++) {
       try {
@@ -192,7 +199,12 @@ Hourly Rate: ${rate}`;
         validateAnalysis(analysis);
         break;
       } catch (e) {
-        parseErr = e;
+        if (isApiKeyInvalidError(e)) {
+          throw new Error(
+            "Gemini API key is invalid. Please set a valid GEMINI_API_KEY in your backend environment.",
+          );
+        }
+
         console.warn("Analysis parse attempt failed:", e.message || e);
         if (attempt === maxAnalysisAttempts)
           throw new Error(
@@ -230,11 +242,18 @@ ${request}`;
   } catch (err) {
     console.error(err);
     const isRateLimit = err?.message?.includes("429") || err?.status === 429;
-    res.status(isRateLimit ? 429 : 500).json({
-      error: isRateLimit
-        ? "API rate limit exceeded. Please wait a moment and try again."
-        : err.message,
-    });
+    const isInvalidKey =
+      isApiKeyInvalidError(err) ||
+      String(err?.message || "").includes("Gemini API key is invalid");
+
+    const statusCode = isRateLimit ? 429 : isInvalidKey ? 401 : 500;
+    const errorMessage = isRateLimit
+      ? "API rate limit exceeded. Please wait a moment and try again."
+      : isInvalidKey
+        ? "Gemini API key is invalid. Please update GEMINI_API_KEY in the backend environment and redeploy/restart the server."
+        : err.message;
+
+    res.status(statusCode).json({ error: errorMessage });
   }
 });
 
