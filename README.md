@@ -70,7 +70,7 @@ ScopeGuard/
 This project recently received several hardening fixes; important points to note:
 
 - Model compatibility and resilience
-  - Replaced a deprecated model string and preferring `gemini-2.5-flash`. The backend will try fallback candidates (`gemini-2.5-flash-lite`, `gemini-2.0-flash`) and uses retry/backoff on rate limits.
+  - Replaced a deprecated model string and now prefers `gemini-3.1-flash-lite`. The backend will try fallback candidates (`gemini-2.5-flash-lite`, `gemini-2.0-flash`) and uses retry/backoff on rate limits.
 
 - Robust model output handling
   - Server now extracts the first `{...}` block from model text, applies simple repair heuristics, parses JSON, and validates the schema before returning to the frontend. This reduces errors from malformed or wrapped LLM output.

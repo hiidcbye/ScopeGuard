@@ -7,7 +7,7 @@ Conversation Summary — Full Context
   - "check the whole project to get all context" — inventory repo and determine required env vars.
   - Fix client JSON parse crash: "Failed to execute 'json' on 'Response': Unexpected end of JSON input"
   - Fix 405 error on POST.
-  - Replace deprecated model string `gemini-1.5-flash` and handle model availability.
+  - Replace deprecated model string `gemini-1.5-flash` and then update the backend to prefer `gemini-3.1-flash-lite` while still handling model availability.
   - Harden server-side JSON extraction/repair/validation.
   - "tighten the system prompt" — replace `systemPrompt` in `server.js` with user-provided tightened prompt.
   - Implement analyzer→writer two-step pattern to reduce hallucinations.
